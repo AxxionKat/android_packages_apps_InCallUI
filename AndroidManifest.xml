@@ -33,4 +33,12 @@
         android:persistent="true"
         android:hasCode="false"
         />
+        
+        <activity android:name=".InCallCardActivity"
+                  android:label="@string/inCallLabel"
+                  android:excludeFromRecents="true"
+                  android:launchMode="singleInstance"
+                  android:configChanges="keyboardHidden"
+                  android:exported="false">
+        </activity>        
 </manifest>
