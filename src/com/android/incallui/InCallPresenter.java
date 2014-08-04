@@ -29,6 +29,11 @@ import com.google.common.base.Preconditions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ActivityNotFoundException;
+import android.os.PowerManager;
+import android.provider.Settings;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.view.IWindowManager;
 
 import com.android.services.telephony.common.Call;
 import com.android.services.telephony.common.Call.Capabilities;
@@ -64,6 +69,7 @@ public class InCallPresenter implements CallList.Listener {
     private AccelerometerListener mAccelerometerListener;
     private ProximitySensor mProximitySensor;
     private boolean mServiceConnected = false;
+    private boolean mCallUiInBackground = false;
     private static String LOG_TAG = "InCallPresenter";
     VideoCallManager mVideoCallManager;
 
@@ -392,10 +398,10 @@ public class InCallPresenter implements CallList.Listener {
         mInCallState = newState;
 
         // Disable notification shade and soft navigation buttons
+        // on new incoming call as long it is no background call
         if (newState.isIncoming()) {
-            CallCommandClient.getInstance().setSystemBarNavigationEnabled(false);
-            if (mAccelerometerListener != null) {
-                mAccelerometerListener.enableSensor(true);
+            if (!mCallUiInBackground) {
+                CallCommandClient.getInstance().setSystemBarNavigationEnabled(false);
             }
         }
 
