@@ -28,6 +28,5 @@ in time when the process is killed and an incoming call is received.
     <application
         android:persistent="true"
         android:hasCode="false"
-        >
-    </application>
+        />
 </manifest>
