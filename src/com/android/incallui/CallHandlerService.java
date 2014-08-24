@@ -230,7 +230,6 @@ public class CallHandlerService extends Service {
         mInCallPresenter = InCallPresenter.getInstance();
 
         mInCallPresenter.setUp(getApplicationContext(), mCallList, mAudioModeProvider);
-        CallRecorder.getInstance().setUp(getApplicationContext());
 
         mServiceStarted = true;
     }

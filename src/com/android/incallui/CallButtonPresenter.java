@@ -26,6 +26,7 @@ import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.services.telephony.common.AudioMode;
 import com.android.services.telephony.common.Call;
+import com.android.services.telephony.common.CallDetails;
 import com.android.services.telephony.common.Call.Capabilities;
 
 import android.app.AlertDialog;
@@ -368,10 +369,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             mShowManageConference = (call.isConferenceCall() && !isGenericConference);
 
             updateExtraButtonRow();
-
-            boolean canRecord = CallRecorder.getInstance().isEnabled() &&
-                    CallList.getInstance().getActiveCall() != null;
-            ui.showRecording(canRecord);
         }
     }
 
@@ -414,7 +411,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         void enableHold(boolean enabled);
         void showMerge(boolean show);
         void showSwap(boolean show);
-        void showRecording(boolean show);
         void showAddCall(boolean show);
         void enableAddCall(boolean enabled);
         void enableAddParticipant(boolean show);
